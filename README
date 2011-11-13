@@ -1,0 +1,22 @@
+Multi-Module Maven GWT JRebel Example Project
+
+OVERVIEW
+	This project exists to demonstrate a bug in JRebel when using GWT where changes to client-side classes in a maven-module are not detected by JRebel, but changes in the local project are. The project is intended to be as simple as possible while still demonstrating the bug.
+	
+USE
+	To reproduce the issue, follow these steps:
+	
+	1. Compile the project:
+		mvn install -Djrebel.jar.path=/path/to/jrebel.jar
+	2. Run the GWT App with JRebel:
+		cd GwtApp
+		mvn gwt:run -Djrebel.jar.path=/path/to/jrebel.jar
+	3. Open the app in your web browser with the GWT plugin by clicking the appropriate button in the GWT Developer app
+	4. At this point, it can be seen that JRebel is monitoring both the local and the library classes directory, and that it has instrumented local classes, but not the library classes:
+		./check-rebel-log.sh # From the GwtApp directory
+	5. To demonstrate the issue, change the LibraryLabel class to update the text it prints to the screen, and then mvn:compile the changes:
+		GwtLibrary/src/main/java/org/hypher/mavengwt/library/client/LibraryLabel.java
+	6. Note that the change does not show up in the client. To show that JRebel is working for local classes, modify the LocalLabel class, and then mvn:compile the changes:
+		GwtApp/src/main/java/org/hypher/mavengwt/client/LocalLabel.java
+	7. The tracing-enabled jrebel log file is available in GwtApp/rebel.log
+	8. An example rebel log of the issue can be found in GwtApp/rebel.log.example
