@@ -10,7 +10,7 @@
 	
 	<parent>
 		<groupId>org.hypher.mavengwt</groupId>
-		<artifactId>MavenGwtTest</artifactId>
+		<artifactId>MavenGwtJRebelTest</artifactId>
 		<relativePath>..</relativePath>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
